@@ -6,42 +6,53 @@ import java.util.Random;
 
 public class jogodasenha {
     public static void main(String[] args) {
+		int vidas = 10;
 		int [] senha = new int[4];
 		int [] digitos = new int[4];
 		randomizar(senha);
+		while (vidas!= 0 ) {
 		receber(digitos);
-		comparar1(senha, digitos);
+		if(comparar1(senha, digitos) == 4) {
+			System.out.println("Você ganhou!");
+			System.exit(0);
+		}
 		comparar2(senha, digitos);
-		
-	    
-	}
+		vidas--;
+		System.out.println("Vidas = "+vidas);
+		if(vidas == 0) {
+			System.out.println("Game Over! O computador ganhou!");
+		}
+		  }
+		}
     public static void randomizar(int[] senha) {
     	Random rand = new Random();
     	for (int i=0; i<senha.length;i++) {
-    		senha[i]= rand.nextInt(6);
-    		System.out.println(senha[i]);
+    		senha[i]= rand.nextInt(6)+1;
+    		System.out.print(senha[i]);
     	}
+    	System.out.println("\n");
     }
     public static void receber(int[] digitos) {
     Scanner scan= new Scanner(System.in);
     	for(int i=0; i<digitos.length; i++) {
     		digitos[i]= scan.nextInt();
-    		
+    		if(digitos[i] >= 7 || digitos[i] <= 0) {
+    			System.out.println("O número deve ser de 1 a 6. \nPrograma finalizado.");
+    			System.exit(0);
+    		}
     	}
-    	scan.close();
     }
-    public static void comparar1(int [] senha, int [] digitos) {
+    public static int comparar1(int [] senha, int [] digitos) {
     	int contp=0;
     	for (int i=0; i<senha.length; i++) {
     		if (senha[i]== digitos[i]) {
-    			contp++;
-    			
+    			contp++;			
     		}
- 
     	}
     	System.out.println("Digitos corretos: " + contp);
+    	return contp;
     }
-    public static void comparar2(int [] senha, int [] digitos) {
+    public static int comparar2(int [] senha, int [] digitos) {
     	int contp=0;
     	for (int i=0; i<senha.length; i++) {
     		if (senha[i] != digitos[i] ){
@@ -55,6 +66,6 @@ public class jogodasenha {
     	      }
     		}
     	System.out.println("Digitos deslocados: " + contp);
-       
+    	return contp;
       }
   }
