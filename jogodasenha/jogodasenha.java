@@ -10,8 +10,9 @@ public class jogodasenha {
 		int [] senha = new int[4];
 		int [] digitos = new int[4];
 		randomizar(senha);
+		Scanner scan = new Scanner(System.in);
 		while (vidas!= 0 ) {
-		receber(digitos);
+		receber(scan,digitos);
 		if(comparar1(senha, digitos) == 4) {
 			System.out.println("Você ganhou!");
 			System.exit(0);
@@ -23,6 +24,7 @@ public class jogodasenha {
 			System.out.println("Game Over! O computador ganhou!");
 		}
 		  }
+		  scan.close();
 		}
     public static void randomizar(int[] senha) {
     	Random rand = new Random();
@@ -32,8 +34,7 @@ public class jogodasenha {
     	}
     	System.out.println("\n");
     }
-    public static void receber(int[] digitos) {
-    Scanner scan= new Scanner(System.in);
+    public static void receber(Scanner scan, int[] digitos) {
     	for(int i=0; i<digitos.length; i++) {
     		digitos[i]= scan.nextInt();
     		if(digitos[i] >= 7 || digitos[i] <= 0) {
